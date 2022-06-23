@@ -6,7 +6,7 @@
     "checkJs": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
-    "resolveJsonModule": true,
+    "resolveJsonModule": false,
     "jsx": "react-native",
     "baseUrl": "./src"
   }

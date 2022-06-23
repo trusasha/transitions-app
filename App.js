@@ -1,62 +1,38 @@
-import React, { memo, useCallback, useEffect } from 'react';
-import { Platform, SafeAreaView, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
-import newUseStyles, { ThemeContextProvider } from 'hooks/newUseStyles';
-import { MainStack } from 'navigation/MainStack';
-import { configStore } from 'stores';
-import { keyboardHeightRef } from 'hooks/useKeyboardHeight';
+import { StyleSheet } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import MainStack from "navigation/MainStack";
+import { useFonts, Montserrat_400Regular, Montserrat_700Bold } from "@expo-google-fonts/montserrat";
+import {
+  SourceSansPro_400Regular_Italic,
+  SourceSansPro_700Bold,
+} from "@expo-google-fonts/source-sans-pro";
+import {
+  PlayfairDisplay_400Regular,
+  PlayfairDisplay_500Medium,
+} from "@expo-google-fonts/playfair-display";
 
-const isFullscreen = Platform.OS === 'ios';
-
-const useStyles = newUseStyles(() => ({
-  flex: {
-    flex: 1,
-  },
-}));
-
-const App = () => {
-  const S = useStyles();
-
-  const onLayout = useCallback(
-    /** @param {import('react-native').LayoutChangeEvent} e */
-    (e) => {
-      if (keyboardHeightRef.current === 0) {
-        const appLayoutHeight = e.nativeEvent.layout.height;
-        if (Math.round(configStore.appLayoutHeight) !== Math.round(appLayoutHeight)) {
-          configStore.setAppLayoutHeight(appLayoutHeight);
-        }
-      }
-    },
-    [],
-  );
-
-  /** @type {typeof SafeAreaView} */
-  // @ts-ignore
-  const MobileWrapperView = memo((props) => {
-    const edgeInsets = useSafeAreaInsets();
-    useEffect(() => {
-      configStore.setEdgeInsets(edgeInsets);
-    }, [edgeInsets]);
-    return <View {...props} />;
+export default function App() {
+  const [fontsLoaded] = useFonts({
+    Montserrat_400Regular,
+    Montserrat_700Bold,
+    SourceSansPro_700Bold,
+    SourceSansPro_400Regular_Italic,
+    PlayfairDisplay_400Regular,
+    PlayfairDisplay_500Medium,
   });
 
-  const WrapperViewProvider = isFullscreen ? SafeAreaProvider : View;
-  const WrapperView = isFullscreen ? MobileWrapperView : SafeAreaView;
-
   return (
-    <ThemeContextProvider>
-      <WrapperViewProvider style={S.flex}>
-        <WrapperView nativeID="root-inner-container" style={S.flex}>
-          <View style={S.flex} onLayout={onLayout}>
-            <NavigationContainer>
-              <MainStack />
-            </NavigationContainer>
-          </View>
-        </WrapperView>
-      </WrapperViewProvider>
-    </ThemeContextProvider>
+    <NavigationContainer>
+      <MainStack />
+    </NavigationContainer>
   );
-};
+}
 
-export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
