@@ -1,3 +1,4 @@
+import React from "react";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import MainStack from "navigation/MainStack";
@@ -21,11 +22,7 @@ export default function App() {
     PlayfairDisplay_500Medium,
   });
 
-  return (
-    <NavigationContainer>
-      <MainStack />
-    </NavigationContainer>
-  );
+  return <NavigationContainer>{fontsLoaded && <MainStack />}</NavigationContainer>;
 }
 
 const styles = StyleSheet.create({

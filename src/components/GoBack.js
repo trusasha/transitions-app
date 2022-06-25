@@ -5,14 +5,23 @@ import { View } from "react-native-animatable";
 import { fonts } from "../config/theme";
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
 
-export default function GoBack() {
+/**
+ * @typedef {{
+ *  title?: boolean
+ * }} GoBackParams
+ */
+
+/**
+ * @param {GoBackParams} props
+ */
+export default function GoBack({ title }) {
   const navigation = useNavigation();
   const onGoBack = useCallback(() => navigation.goBack(), []);
 
   return (
     <TouchableOpacity style={S.container} onPress={onGoBack}>
-      <AntDesign name="arrowleft" style={S.iconStyle} size={22} color={"#000"} />
-      <Text style={S.textStyle}>Home</Text>
+      <AntDesign name="arrowleft" size={22} color={"#000"} />
+      {title && <Text style={S.textStyle}>{title}</Text>}
     </TouchableOpacity>
   );
 }
@@ -32,6 +41,5 @@ const S = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 15,
   },
-  iconStyle: { marginRight: 5 },
-  textStyle: { ...fonts.montserratBold, fontSize: 12 },
+  textStyle: { ...fonts.montserratBold, fontSize: 12, marginLeft: 5 },
 });
