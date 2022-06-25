@@ -178,11 +178,7 @@ const Detail = ({ navigation, route }) => {
   );
 };
 
-Detail.sharedElements = (route, otherRoute, showing) =>
-  data.map((i) => ({
-    id: `item.${i.id}.photo`,
-    align: 'center-bottom',
-  }));
+Detail.sharedElements = (route, otherRoute, showing) => data.map((i) => `item.${i.id}.photo`);
 
 export default Detail;
 
