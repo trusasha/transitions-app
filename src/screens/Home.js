@@ -1,9 +1,10 @@
-import { fonts } from "config/theme";
-import React, { useCallback } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, StatusBar } from "react-native";
+import { fonts } from 'config/theme';
+import React, { useCallback } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, StatusBar } from 'react-native';
 
 export default function Home({ navigation }) {
-  const onGoTransition1 = useCallback(() => navigation.navigate("List"), []);
+  const onGoTransition1 = useCallback(() => navigation.navigate('List'), []);
+  const onGoTransition2 = useCallback(() => navigation.navigate('TravelList'), []);
 
   return (
     <SafeAreaView style={S.flex}>
@@ -14,7 +15,7 @@ export default function Home({ navigation }) {
         <TouchableOpacity style={S.button} onPress={onGoTransition1}>
           <Text style={S.buttonText}>Go To 1 Transition 🏖</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={S.button} onPress={onGoTransition1}>
+        <TouchableOpacity style={S.button} onPress={onGoTransition2}>
           <Text style={S.buttonText}>Go To 2 Transition ✨</Text>
         </TouchableOpacity>
         <TouchableOpacity style={S.button} onPress={onGoTransition1}>

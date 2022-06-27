@@ -1,22 +1,13 @@
-import { Easing } from 'react-native';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import Home from 'screens/Home';
 import Detail from 'screens/transition1/Detail';
 import List from 'screens/transition1/List';
+import TravelDetail from 'screens/transition2/TravelDetail';
+import TravelList from 'screens/transition2/TravelList';
 
 const options = {
   gestureEnabled: false,
   headerBackTitleVisible: false,
-  transitionSpec: {
-    open: {
-      animation: 'timing',
-      config: { duration: 400, easing: Easing.inOut(Easing.ease) },
-    },
-    close: {
-      animation: 'timing',
-      config: { duration: 400, easing: Easing.inOut(Easing.ease) },
-    },
-  },
   cardStyleInterpolator: ({ current: { progress } }) => {
     return {
       cardStyle: {
@@ -35,6 +26,8 @@ export default function MainStack() {
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="List" component={List} />
       <Stack.Screen name="Detail" component={Detail} options={() => options} />
+      <Stack.Screen name="TravelList" component={TravelList} />
+      <Stack.Screen name="TravelDetail" component={TravelDetail} options={() => options} />
     </Stack.Navigator>
   );
 }
