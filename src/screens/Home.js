@@ -2,28 +2,28 @@ import { fonts } from 'config/theme';
 import React, { useCallback } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, StatusBar } from 'react-native';
 
+const screens = [
+  { emoji: '🏖', screen: 'List' },
+  { emoji: '✈️', screen: 'TravelList' },
+  { emoji: '⛰', screen: 'TravelUpList' },
+];
+
 export default function Home({ navigation }) {
-  const onGoTransition1 = useCallback(() => navigation.navigate('List'), []);
-  const onGoTransition2 = useCallback(() => navigation.navigate('TravelList'), []);
+  const renderItem = useCallback(({ screen, emoji }, index) => {
+    const onPress = () => navigation.push(screen);
+    return (
+      <TouchableOpacity style={S.button} onPress={onPress} key={`${index}`}>
+        <Text style={S.buttonText} children={`Go To ${index + 1} Transition ${emoji}`} />
+      </TouchableOpacity>
+    );
+  }, []);
 
   return (
     <SafeAreaView style={S.flex}>
       <StatusBar hidden={false} animated />
       <View style={S.container}>
-        <Text style={S.title}>Home</Text>
-
-        <TouchableOpacity style={S.button} onPress={onGoTransition1}>
-          <Text style={S.buttonText}>Go To 1 Transition 🏖</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={S.button} onPress={onGoTransition2}>
-          <Text style={S.buttonText}>Go To 2 Transition ✨</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={S.button} onPress={onGoTransition1}>
-          <Text style={S.buttonText}>Go To 3 Transition ✨</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={S.button} onPress={onGoTransition1}>
-          <Text style={S.buttonText}>Go To 4 Transition ✨</Text>
-        </TouchableOpacity>
+        <Text style={S.title} children={'Home'} />
+        {screens.map(renderItem)}
       </View>
     </SafeAreaView>
   );
