@@ -17,7 +17,7 @@ import * as Animatable from 'react-native-animatable';
  */
 export default function GoBack({ title, style }) {
   const navigation = useNavigation();
-  const onGoBack = useCallback(() => navigation.goBack(), []);
+  const onGoBack = useCallback(() => navigation.goBack(), [navigation]);
   const styles = [S.container];
 
   return (
