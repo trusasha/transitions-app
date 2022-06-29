@@ -9,3 +9,7 @@ Application for training work with animate transitions in React Native.
 ### Transition 2
 
 ![Transition 2](./gif/transition-2.gif)
+
+### Transition 3
+
+![Transition 2](./gif/transition-3.gif)
