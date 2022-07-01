@@ -1,5 +1,5 @@
 import data from 'config/data/travelup';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -28,7 +28,7 @@ const VISIBLE_ITEMS = 4;
  * }} CardItem
  */
 
-const TravelUpList = ({ navigation }) => {
+const List = ({ navigation }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const animatedValue = useRef(new Animated.Value(0)).current;
@@ -168,7 +168,7 @@ const TravelUpList = ({ navigation }) => {
   );
 };
 
-export default TravelUpList;
+export default List;
 
 const S = StyleSheet.create({
   flex: { flex: 1 },

@@ -45,7 +45,7 @@ const Avatars = () => {
   );
 };
 
-const TravelUpDetail = ({ navigation, route }) => {
+const Detail = ({ navigation, route }) => {
   /** @type {import('react').RefObject<Animatable.View>} */
   const bottomRef = useRef(null);
   /** @type {import('react').RefObject<Animatable.View>} */
@@ -104,7 +104,7 @@ const TravelUpDetail = ({ navigation, route }) => {
   );
 };
 
-TravelUpDetail.sharedElements = (route, otherRoute, showing) => {
+Detail.sharedElements = (route, otherRoute, showing) => {
   const { key } = route.params.item;
   return [
     {
@@ -116,7 +116,7 @@ TravelUpDetail.sharedElements = (route, otherRoute, showing) => {
   ];
 };
 
-export default TravelUpDetail;
+export default Detail;
 
 const S = StyleSheet.create({
   flex: { flex: 1 },

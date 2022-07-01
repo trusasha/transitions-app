@@ -73,7 +73,7 @@ export default function List({ navigation }) {
   const bottomListRenderItem = useCallback(
     /** @param {DataItem} item */
     (item) => {
-      const onPress = () => navigation.push('Detail', { item });
+      const onPress = () => navigation.push('Transition1Detail', { item });
       const source = { uri: item.imageUri };
 
       return (
@@ -86,7 +86,7 @@ export default function List({ navigation }) {
         </TouchableOpacity>
       );
     },
-    [],
+    [navigation],
   );
 
   return (

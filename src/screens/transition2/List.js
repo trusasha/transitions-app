@@ -30,39 +30,42 @@ export const ITEM_WIDTH = width * 0.68;
 export const SPACING = 20;
 const FULL_SIZE = ITEM_WIDTH + SPACING * 2;
 
-const TravelList = ({ navigation }) => {
+const List = ({ navigation }) => {
   const scrollX = useRef(new Animated.Value(0)).current;
 
   /** @type {import('react-native').ListRenderItem<LocationItem>} */
-  const renderItem = useCallback(({ item, index }) => {
-    const { image, location, numberOfDays, key } = item;
+  const renderItem = useCallback(
+    ({ item, index }) => {
+      const { image, location, numberOfDays, key } = item;
 
-    const inputRange = [(index - 1) * FULL_SIZE, index * FULL_SIZE, (index + 1) * FULL_SIZE];
-    const translateX = scrollX.interpolate({
-      inputRange,
-      outputRange: [ITEM_WIDTH, 0, -ITEM_WIDTH],
-    });
+      const inputRange = [(index - 1) * FULL_SIZE, index * FULL_SIZE, (index + 1) * FULL_SIZE];
+      const translateX = scrollX.interpolate({
+        inputRange,
+        outputRange: [ITEM_WIDTH, 0, -ITEM_WIDTH],
+      });
 
-    const textStyle = [S.itemLocation, { transform: [{ translateX }] }];
+      const textStyle = [S.itemLocation, { transform: [{ translateX }] }];
 
-    const onPress = () => navigation.push('TravelDetail', { item });
+      const onPress = () => navigation.push('Transition2Detail', { item });
 
-    return (
-      <TouchableOpacity style={S.itemContainer} onPress={onPress} activeOpacity={0.9}>
-        <SharedElement id={`travel-image-${key}`} style={S.itemImage}>
-          <Animated.Image style={S.itemImage} resizeMode={'cover'} source={{ uri: image }} />
-        </SharedElement>
+      return (
+        <TouchableOpacity style={S.itemContainer} onPress={onPress} activeOpacity={0.9}>
+          <SharedElement id={`travel-image-${key}`} style={S.itemImage}>
+            <Animated.Image style={S.itemImage} resizeMode={'cover'} source={{ uri: image }} />
+          </SharedElement>
 
-        <SharedElement id={`travel-title-${key}`} style={S.itemLocationContainer}>
-          <Animated.Text style={textStyle} children={location} />
-        </SharedElement>
-        <View style={S.itemDaysContainer}>
-          <Text style={S.itemDaysValue} children={`${numberOfDays}`} />
-          <Text style={S.itemDaysLabel} children={'days'} />
-        </View>
-      </TouchableOpacity>
-    );
-  }, []);
+          <SharedElement id={`travel-title-${key}`} style={S.itemLocationContainer}>
+            <Animated.Text style={textStyle} children={location} />
+          </SharedElement>
+          <View style={S.itemDaysContainer}>
+            <Text style={S.itemDaysValue} children={`${numberOfDays}`} />
+            <Text style={S.itemDaysLabel} children={'days'} />
+          </View>
+        </TouchableOpacity>
+      );
+    },
+    [navigation, scrollX],
+  );
 
   const keyExtractor = useCallback(({ key }) => key, []);
 
@@ -86,7 +89,7 @@ const TravelList = ({ navigation }) => {
   );
 };
 
-export default TravelList;
+export default List;
 
 const S = StyleSheet.create({
   flex: { flex: 1 },

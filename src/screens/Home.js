@@ -3,20 +3,24 @@ import React, { useCallback } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, StatusBar } from 'react-native';
 
 const screens = [
-  { emoji: '🏖', screen: 'List' },
-  { emoji: '✈️', screen: 'TravelList' },
-  { emoji: '⛰', screen: 'TravelUpList' },
+  { emoji: '🏖', screen: 'Transition1List' },
+  { emoji: '✈️', screen: 'Transition2List' },
+  { emoji: '⛰', screen: 'Transition3List' },
+  { emoji: '📸', screen: 'Transition4List' },
 ];
 
 export default function Home({ navigation }) {
-  const renderItem = useCallback(({ screen, emoji }, index) => {
-    const onPress = () => navigation.push(screen);
-    return (
-      <TouchableOpacity style={S.button} onPress={onPress} key={`${index}`}>
-        <Text style={S.buttonText} children={`Go To ${index + 1} Transition ${emoji}`} />
-      </TouchableOpacity>
-    );
-  }, []);
+  const renderItem = useCallback(
+    ({ screen, emoji }, index) => {
+      const onPress = () => navigation.push(screen);
+      return (
+        <TouchableOpacity style={S.button} onPress={onPress} key={`${index}`}>
+          <Text style={S.buttonText} children={`Go To ${index + 1} Transition ${emoji}`} />
+        </TouchableOpacity>
+      );
+    },
+    [navigation],
+  );
 
   return (
     <SafeAreaView style={S.flex}>

@@ -11,7 +11,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { SharedElement } from 'react-navigation-shared-element';
-import { ITEM_WIDTH, SPACING } from './TravelList';
+import { ITEM_WIDTH, SPACING } from './List';
 import * as Animatable from 'react-native-animatable';
 
 const { width } = Dimensions.get('screen');
@@ -28,8 +28,8 @@ const zoomIn = {
 
 const activityImage = { uri: 'https://miro.medium.com/max/4064/1*qYUvh-EtES8dtgKiBRiLsA.png' };
 
-const TravelDetail = ({ route }) => {
-  /** @type {import('./TravelList').LocationItem} */
+const Detail = ({ route }) => {
+  /** @type {import('./List').LocationItem} */
   const item = route.params.item;
 
   const renderItem = useCallback(
@@ -51,7 +51,6 @@ const TravelDetail = ({ route }) => {
   const { location, image, key } = item;
   return (
     <SafeAreaView style={S.flex}>
-      <View style={S.container}></View>
       <GoBack style={S.back} />
       <View style={S.imageContainer}>
         <SharedElement style={S.textContainer} id={`travel-title-${key}`}>
@@ -71,7 +70,7 @@ const TravelDetail = ({ route }) => {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={S.activityContentContainer}
           data={[...Array(8).keys()]}
-          style={{ overflow: 'visible' }}
+          style={S.list}
           renderItem={renderItem}
           keyExtractor={keyExtractor}
         />
@@ -80,7 +79,7 @@ const TravelDetail = ({ route }) => {
   );
 };
 
-TravelDetail.sharedElements = (route, otherRoute, showing) => {
+Detail.sharedElements = (route, otherRoute, showing) => {
   const { item } = route.params;
   return [
     {
@@ -92,7 +91,7 @@ TravelDetail.sharedElements = (route, otherRoute, showing) => {
   ];
 };
 
-export default TravelDetail;
+export default Detail;
 
 const S = StyleSheet.create({
   flex: { flex: 1 },
@@ -152,4 +151,5 @@ const S = StyleSheet.create({
     paddingVertical: SPACING,
     overflow: 'visible',
   },
+  list: { overflow: 'visible' },
 });
